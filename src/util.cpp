@@ -369,6 +369,10 @@ int LogPrintStr(const std::string &str)
     }
     else if (fPrintToDebugLog)
     {
+    	// print to console
+        ret = fwrite(strTimestamped.data(), 1, strTimestamped.size(), stdout);
+        fflush(stdout);
+
         boost::call_once(&DebugPrintInit, debugPrintInitFlag);
         boost::mutex::scoped_lock scoped_lock(*mutexDebugLog);
 
